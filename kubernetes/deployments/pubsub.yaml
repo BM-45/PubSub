@@ -17,8 +17,8 @@ spec:
       containers:
         - name: publisher
           image: bmt45/pubsub:latest
-          command: ["/rover_ws/scripts/start_publisher.sh"]
+          command: ["/rover_ws/PubSub/scripts/start_publisher.sh"]
           
         - name: subscriber
           image: bmt45/pubsub:latest
-          command: ["/rover_ws/scripts/start_subscriber.sh"]
+          command: ["/rover_ws/PubSub/scripts/start_subscriber.sh"]
