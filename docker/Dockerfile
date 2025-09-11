@@ -58,7 +58,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Copying the source code into the workspace.
-WORKDIR /rover_ws/src/node1
+WORKDIR /rover_ws/
 RUN git clone https://github.com/BM-45/PubSub.git
 
 # Builidng the workspace in the current directory.
