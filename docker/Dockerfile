@@ -64,6 +64,8 @@ RUN git clone https://github.com/BM-45/PubSub.git
 # Builidng the workspace in the current directory.
 WORKDIR /rover_ws
 RUN . /opt/ros/humble/setup.sh && colcon build --symlink-install
+RUN chmod +x /rover_ws/scripts/start_publisher.sh
+RUN chmod +x /rover_ws/scripts/start_subscriber.sh
 
 # Sourcing ROS in every shell
 RUN echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc
