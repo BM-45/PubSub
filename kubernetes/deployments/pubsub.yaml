@@ -17,9 +17,8 @@ spec:
       containers:
         - name: publisher
           image: bmt45/pubsub:latest
-          command: ["ros2"]
-          args: ["run", "node1", "talker"]
+          command: ["/rover_ws/scripts/start_publisher.sh"]
+          
         - name: subscriber
           image: bmt45/pubsub:latest
-          command: ["ros2"]
-          args: ["run", "node1", "listener"]
+          command: ["/rover_ws/scripts/start_subscriber.sh"]
