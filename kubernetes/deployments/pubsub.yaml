@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ros-pubsub
+  labels:
+    app: ros-pubsub
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ros-pubsub
+  template:
+    metadata:
+      labels:
+        app: ros-pubsub
+    spec:
+      containers:
+        - name: publisher
+          image: bmt45/pubsub:latest
+          command: ["ros2"]
+          args: ["run", "node1", "talker"]
+        - name: subscriber
+          image: bmt45/pubsub:latest
+          command: ["ros2"]
+          args: ["run", "node1", "listener"]
