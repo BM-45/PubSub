@@ -27,12 +27,11 @@ This project demonstrates a ROS2 publish-subscribe messaging pattern implementat
 .
 ├── Dockerfile              # Docker image definition
 ├── docker-compose.yml      # Multi-container orchestration
-├── kubernetes/             # Kubernetes manifests
-│   ├── deployment.yaml    # K8s deployment configuration
-│   └── service.yaml       # K8s service definitions
+├── kubernetes/deployments  # Kubernetes manifests
+│   ├── pubsub.yaml         # K8s deployment configuration
 ├── src/                    # Source code
-│   ├── publisher/         # Publisher node implementation
-│   └── subscriber/        # Subscriber node implementation
+│   ├── publisher/          # Publisher node implementation
+│   └── subscriber/         # Subscriber node implementation
 └── launch/                 # ROS2 launch files
 ```
 
@@ -69,20 +68,14 @@ ros2 launch launch/pubsub.launch.py
 
 1. Build the Docker image:
 ```bash
-docker-compose build
-```
-
-2. Run the containers:
-```bash
-docker-compose up
+docker build -t image-name .
 ```
 
 ### Kubernetes Deployment
 
 1. Apply the Kubernetes manifests:
 ```bash
-kubectl apply -f kubernetes/deployment.yaml
-kubectl apply -f kubernetes/service.yaml
+kubectl apply -f kubernetes/deployment/pubsub.yaml
 ```
 
 2. Verify the deployment:
@@ -90,63 +83,3 @@ kubectl apply -f kubernetes/service.yaml
 kubectl get pods
 kubectl get services
 ```
-
-## Usage
-
-### Publisher Node
-The publisher node broadcasts messages on a defined topic at regular intervals.
-
-### Subscriber Node
-The subscriber node listens to the topic and processes incoming messages.
-
-### Topics
-- Default topic: `/pubsub_topic`
-- Message type: `std_msgs/String` (or custom message type)
-
-## Configuration
-
-Edit the configuration files to customize:
-- Topic names
-- Message types
-- Publishing frequency
-- QoS (Quality of Service) settings
-
-## Monitoring
-
-Monitor the communication using ROS2 tools:
-```bash
-# List active topics
-ros2 topic list
-
-# Echo messages on a topic
-ros2 topic echo /pubsub_topic
-
-# Check node information
-ros2 node info /publisher_node
-ros2 node info /subscriber_node
-```
-
-## Troubleshooting
-
-- Ensure ROS2 environment is sourced: `source /opt/ros/<distro>/setup.bash`
-- Check if nodes are running: `ros2 node list`
-- Verify topic connections: `ros2 topic info /pubsub_topic`
-- For Docker issues, check container logs: `docker-compose logs`
-
-## Contributing
-
-Contributions are welcome! Please:
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Submit a pull request
-
-## License
-
-This project is licensed under the MIT License.
-
-## References
-
-- [ROS2 Documentation](https://docs.ros.org/)
-- [Docker Documentation](https://docs.docker.com/)
-- [Kubernetes Documentation](https://kubernetes.io/docs/)
